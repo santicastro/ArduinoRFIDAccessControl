@@ -26,7 +26,7 @@ void setup() {
 
   //test code
   uint8_t it[6] = {
-    0x01, 0x23, 0x45, 0x67, 0x89, 0xab        };
+    0x01, 0x23, 0x45, 0x67, 0x89, 0xab          };
   list.add(it);
 
   Serial.print("List size: ");
@@ -57,6 +57,11 @@ void simulateRead(){
   delay(2000);
 }
 
+
+/*
+The rfid reader sends ascii 2 (start of text), 12 ascii characters of hexadecimal values, 
+carriage return, new line and ascii 3 (end of text).
+*/
 void readRFIDCode(){
   char incomingByte;
   if (Serial.available()) {
@@ -97,6 +102,7 @@ void processRFIDCode(char* buffer, int bufferLength){
   else{
     buffer[12]=0;
     for(uint8_t i=0; i<ITEM_SIZE; i++){
+      //the ascii characters are converted to hex bytes to save half the space
       char c1 = buffer[i*2];
       char c2 = buffer[i*2+1];
       rfidCode[i] = (char2hex(c1)<<4) | (char2hex(c2) & 15);
@@ -147,6 +153,7 @@ uint8_t char2hex(char c){
   }
   return 0;
 }
+
 
 
 
