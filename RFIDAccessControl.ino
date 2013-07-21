@@ -19,6 +19,8 @@ EEPROMList list(ITEM_SIZE);
 void setup() {
   Serial.begin(9600);
   pinMode(BUTTON, INPUT);
+  digitalWrite(BUTTON, HIGH);
+
   pinMode(GREEN_LED, OUTPUT);
   pinMode(RED_LED, OUTPUT);
 
