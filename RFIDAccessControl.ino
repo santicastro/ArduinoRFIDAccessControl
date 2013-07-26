@@ -9,11 +9,14 @@
 
 #define BUTTON 2
 
+#define SOFT_SERIAL_RX 10
+#define SOFT_SERIAL_TX 11
+
 #define RFID_START_CHAR  (char)10
 #define RFID_END_CHAR  (char)11
 
 
-SoftwareSerial rfidSerial(10, 11);
+SoftwareSerial rfidSerial(SOFT_SERIAL_RX, SOFT_SERIAL_TX);
 EEPROMList list(ITEM_SIZE);
 
 void setup() {
@@ -39,7 +42,7 @@ char buffer[MAX_CODE_LENGTH], bufferLength;
 
 void loop() {
   readRFIDCode();
-  simulateRead();
+ // simulateRead();
 }
 
 void simulateRead(){
